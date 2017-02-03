@@ -22,7 +22,7 @@ function template_preprocess_islandora_internet_archive_bookreader(array &$varia
   $pages = array();
   foreach ($variables['pages'] as $page_pid => $info) {
     $addendum = $backup_uris ? array('pid' => $page_pid) : array(
-      'uri' => url("islandora/object/{$page_pid}/datastream/{$dsid}/view", array(
+      'uri' => !empty($info['remote_url']) ? $info['remote_url'] : url("islandora/object/{$page_pid}/datastream/{$dsid}/view", array(
         'absolute' => TRUE,
         'query' => array(
           'token' => islandora_get_object_token($page_pid, $dsid, 2),
